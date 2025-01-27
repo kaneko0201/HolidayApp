@@ -1,48 +1,36 @@
 class HomesController < ApplicationController
   require 'openai'
 
-  def show
-  end
-
   def index
   end
 
-  def suggest
-    client = OpenAI::Client.new(api_key: ENV['OPENAI_API_KEY'])
+  def ask
+  end
 
-    begin
-      response = client.chat(
-        parameters: {
-          model: "gpt-4",
-          messages: [
-            { role: "system", content: "You are a helpful holiday planning assistant." },
-            { role: "user", content: suggestion_prompt(params) }
-          ]
-        }
+  def answer
+    client = OpenAI::Client.new(
+      access_token: ENV["OPENAI_API_KEY"],
+      request_timeout: 20
       )
 
-      if response["choices"] && response["choices"][0]["message"]["content"]
-        render json: { suggestion: response["choices"][0]["message"]["content"] }
-      else
-        render json: { error: 'Invalid response from the API' }, status: :bad_gateway
-      end
-    rescue OpenAI::Error => e
-      render json: { error: "API error: #{e.message}" }, status: :internal_server_error
+    prompt = params[:question]
+
+    response = client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [
+          { role: "system", content: "あなたは休日の予定を提案する優秀なアシスタントです。ユーザーの質問に対して、日本語で休日の予定を3つ提供してください。1500字以内で書いてください。" },
+          { role: "user", content: prompt }
+        ],
+        max_tokens: 2000,
+        temperature: 0.7
+      }
+    )
+
+    if response["choices"] && response["choices"][0] && response["choices"][0]["message"]
+      @answer = response["choices"][0]["message"]["content"]
+    else
+      @answer = "回答が見つかりませんでした"
     end
   end
-
-  private
-
-  def suggestion_prompt(params)
-    "Plan a holiday for #{params[:days]} days with #{params[:people]} people. Budget is #{params[:budget]}, location is #{params[:location]}, and the mood is '#{params[:mood]}'."
-  end
-
-  def validate_suggestion_params
-    required_keys = %i[days people budget location mood]
-    missing_keys = required_keys.reject { |key| params[key].present? }
-    unless missing_keys.empty?
-      render json: { error: "Missing parameters: #{missing_keys.join(', ')}" }, status: :unprocessable_entity
-    end
-  end
-
 end

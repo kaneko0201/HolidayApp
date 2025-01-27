@@ -1,0 +1,11 @@
+<h1>Chatbot</h1>
+
+<%= form_with url: homes_answer_path, method: :post, local: true do %>
+  <div>
+    <%= label_tag :question, "質問を入力してください:" %>
+    <%= text_field_tag :question, nil, required: true %>
+  </div>
+  <div>
+    <%= submit_tag "質問する" %>
+  </div>
+<% end %>

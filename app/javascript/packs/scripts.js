@@ -3,6 +3,7 @@
 * Copyright 2013-2023 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-stylish-portfolio/blob/master/LICENSE)
 */
+
 window.addEventListener('DOMContentLoaded', event => {
 
     const sidebarWrapper = document.getElementById('sidebar-wrapper');
@@ -78,38 +79,3 @@ function fadeIn(el, display) {
         }
     })();
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('holiday-form');
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      const formData = new FormData(form);
-      const data = {
-        days: formData.get('days'),
-        people: formData.get('people'),
-        budget: formData.get('budget'),
-        location: formData.get('location'),
-        mood: formData.get('mood')
-      };
-
-      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-      try {
-        const response = await fetch('/api/homes_suggestions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': csrfToken
-          },
-          body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-        alert(`提案: ${result.suggestion}`);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    });
-});

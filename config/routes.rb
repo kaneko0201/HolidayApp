@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root to: 'homes#index'
-  post '/api/homes_suggestions', to: 'homes#suggest'
-  resources :homes, only: [:show]
+  get 'homes/ask' => 'homes#ask'
+  post 'homes/answer' => 'homes#answer'
 end
