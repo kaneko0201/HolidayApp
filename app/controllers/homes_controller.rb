@@ -10,17 +10,32 @@ class HomesController < ApplicationController
   def answer
     client = OpenAI::Client.new(
       access_token: ENV["OPENAI_API_KEY"],
-      request_timeout: 20
       )
 
     prompt = params[:question]
+    days = params[:days]
+    people = params[:people]
+    budget = params[:budget]
+    location = params[:location]
+    mood = params[:mood]
+    remarks = params[:remarks]
 
     response = client.chat(
       parameters: {
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o-mini",#本番環境での使用には日付ありの GPT モデルが推奨
         messages: [
-          { role: "system", content: "あなたは休日の予定を提案する優秀なアシスタントです。ユーザーの質問に対して、日本語で休日の予定を3つ提供してください。1500字以内で書いてください。" },
-          { role: "user", content: prompt }
+          { role: "system", content: "あなたは休日の予定を提案する優秀なアシスタントです。ユーザーの質問に対して、日本語で休日の予定の提案書を作成してください。タイムスケジュールを組んでください。休日の日数、人数、予算、現在地、気持ち、備考を考慮してください。" },
+          {
+            role: "user",
+            content: <<~PROMPT
+            休日の日数: #{days}日
+            人数: #{people}人
+            一人当たりの予算: #{budget}円
+            現在地: #{location}
+            気持ち: #{mood}
+            備考: #{remarks}
+          PROMPT
+          }
         ],
         max_tokens: 2000,
         temperature: 0.7
