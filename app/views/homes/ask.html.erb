@@ -1,17 +1,36 @@
 <h1>Chatbot</h1>
 
 <%= form_with url: homes_answer_path, method: :post, local: true do %>
+  <% if @user.errors.any? %>
+    <div class="error-messages">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div>
-    <%= label_tag :days, "休日の日数:" %>
-    <%= number_field_tag :days, nil, required: true, min: 1, max: 5,placeholder: "例: 3" %>
+    <%= label_tag :start_date, "休日の開始日:" %>
+    <%= date_field_tag :start_date, nil, required: true, min: Date.today %>
   </div>
   <div>
-    <%= label_tag :people, "人数:" %>
-    <%= number_field_tag :people, nil, required: true, min: 1, max: 5, placeholder: "例: 2" %>
+    <%= label_tag :end_date, "休日の終了日:" %>
+    <%= date_field_tag :end_date, nil, required: true, min: Date.today %>
+    <small>※開始日から5日以内の日付を選択してください</small>
+  </div>
+
+  <div>
+    <%= label_tag :people, "同行する人数:" %>
+    <%= select_tag :people, options_for_select((1..5).map { |n| [n, n] }), prompt: "人数を選択", required: true %>
+
+    <%# max: 5 (仮定) %>
   </div>
   <div>
-    <%= label_tag :budget, "一人当たりの予算 (円):" %>
-    <%= number_field_tag :budget, nil, required: true, step: 1000, min: 0, placeholder: "例: 5000" %>
+    <%= label_tag :budget, "1人当たりの予算:" %>
+    <%= select_tag :budget, options_for_select((0..100000).step(5000).map { |n| [n.to_s(:delimited), n] }), prompt: "予算を選択", required: true %>
+
   </div>
   <div>
     <%= label_tag :location, "現在地:" %>
@@ -23,7 +42,7 @@
   </div>
   <div>
     <%= label_tag :remarks, "備考:" %>
-    <%= text_field_tag :remarks, nil, required: false, placeholder: "例: 交通機関を使う" %>
+    <%= text_field_tag :remarks, nil,placeholder: "例: 交通機関を使う" %>
   </div>
   <div>
     <%= submit_tag "質問する" %>

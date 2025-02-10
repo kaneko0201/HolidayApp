@@ -1,0 +1,41 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        start_date: "開始日"
+        end_date: "終了日"
+        people: "人数"
+        budget: "1人当たりの予算"
+        location: "現在地"
+        mood: "気持ち"
+
+    errors:
+      models:
+        user:
+          attributes:
+            start_date:
+              blank: "を入力してください"
+            end_date:
+              blank: "を入力してください"
+              invalid: "は開始日より後の日付を選択してください"
+            people:
+              blank: "を入力してください"
+              not_a_number: "は数値で入力してください"
+              greater_than_or_equal_to: "は1以上で入力してください"
+              less_than_or_equal_to: "は5以下で入力してください"
+            budget:
+              blank: "を入力してください"
+              not_a_number: "は数値で入力してください"
+              greater_than_or_equal_to: "は0以上で入力してください"
+              multiple_of: "は1000円単位で入力してください"
+            location:
+              blank: "を入力してください"
+            mood:
+              blank: "を入力してください"
+  errors:
+    messages:
+      greater_than_or_equal_to: "%{count}以上で入力してください"
+      less_than_or_equal_to: "%{count}以下で入力してください"
+      not_a_number: "は数値で入力してください"
+      blank: "を入力してください"
+      invalid: "が不正です"

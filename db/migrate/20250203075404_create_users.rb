@@ -1,6 +1,6 @@
-class CreateDays < ActiveRecord::Migration[6.1]
+class CreateUsers < ActiveRecord::Migration[6.1]
   def change
-    create_table :days do |t|
+    create_table :users do |t|
       t.date :start_date
       t.date :end_date
 

@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_01_09_061008) do
+ActiveRecord::Schema.define(version: 2025_02_05_021415) do
 
-  create_table "days", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "people"
+    t.integer "budget"
+    t.text "location"
+    t.text "mood"
+    t.text "remarks"
   end
 
 end
