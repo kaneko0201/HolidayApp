@@ -1,6 +1,9 @@
 <h1>Chatbotの回答</h1>
 
 <p><strong>あなたの質問:</strong> <%= params[:question] %></p>
-<p><strong>Chatbotの回答:</strong> <%= simple_format(@answer) %></p>
+<p><strong>Chatbotの回答:</strong>
+  <%= sanitize(simple_format(@answer), tags: %w(a p br), attributes: %w(href title target rel))
+       .gsub('<a ', '<a target="_blank" rel="noopener noreferrer" ').html_safe %>
+</p>
 
 <%= link_to "別の質問をする", homes_ask_path %>
