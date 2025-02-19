@@ -1,5 +1,6 @@
 class HomesController < ApplicationController
   require 'openai'
+  require_relative '../services/google_search_service'
 
   def index
   end
@@ -30,30 +31,13 @@ class HomesController < ApplicationController
           model: "gpt-4o-mini",#本番環境での使用には日付ありの GPT モデルが推奨
           messages: [
             { role: "system", content: <<~TEXT
-              あなたは休日の予定を提案する優秀なアシスタントです。
-              ユーザーの質問に対して、日本語で休日の予定の提案書を作成してください。
-              具体的な行き先を提案してください。
-              タイムスケジュールを組んでください。
-              休日の日数、人数、予算、現在地、気持ち、備考を考慮してください。
-              TEXT
-            },
-            { role: "system", content: <<~TEXT
-              **以下の信頼できる情報源から各行き先に関連するURLを取得してください。**
-              - 公式サイト（例: .go.jp, .lg.jp, .or.jp,.gr.jp, .co.jp など）
-              - 大手旅行サイト（例: jalan.net, rakuten.co.jp, knt.co.jpなど）
-
-              **出力フォーマット**
-              - 取得したURLの前にリンク先の公式名称を記載してください。
-              - 取得したURLを、以下の HTML の形式で出力してください。
-
-              <a href="取得したURLを入力" target="_blank" rel="noopener noreferrer">リンク名</a>
-
-              **注意**
-              1. **アクセスできないURLを含めないでください。**
-              2. **HTTP ステータスコードが `200 OK` のページのみ使用してください。**
-              3. **`404 Not Found`, `403 Forbidden`, `NXDOMAIN`, `500 Internal Server Error` などのページは絶対に含めないでください。**
-              4. **URL を生成するのではなく、正確なURLを参照してください。**
-
+              - あなたは休日の予定を提案する優秀なアシスタントです。
+              - ユーザーの質問に対して、日本語で休日の予定の提案書を作成してください。
+              - 具体的な行き先を提案してください。
+              - 各行き先の名称は「」で囲ってください。
+                ※その他の箇所で「」を使用しないでください。
+              - タイムスケジュールを組んでください。
+              - 休日の日数、人数、予算、現在地、気持ち、備考を考慮してください。
               TEXT
             },
             { role: "user", content: <<~PROMPT
@@ -74,8 +58,12 @@ class HomesController < ApplicationController
 
       if response["choices"] && response["choices"][0] && response["choices"][0]["message"]
         @answer = response["choices"][0]["message"]["content"]
-        puts @answer
 
+        @places = @answer.scan(/「(.+?)」/).flatten.uniq
+
+        @search_results = @places.map do |place|
+          { name: place, results: GoogleSearchService.search("#{place} 公式サイト") }
+        end
       else
         @answer = "回答が見つかりませんでした"
       end

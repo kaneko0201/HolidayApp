@@ -32,6 +32,7 @@ gem 'popper_js', '~> 2.0'
 gem 'sassc-rails'
 gem 'ruby-openai'
 gem 'dotenv-rails'
+gem 'google-apis-customsearch_v1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
