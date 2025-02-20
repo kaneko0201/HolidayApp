@@ -1,12 +1,20 @@
 class HomesController < ApplicationController
   require 'openai'
   require_relative '../services/google_search_service'
+  require_relative '../services/google_geolocation_service.rb'
+  require_relative '../services/google_geocoding_service'
 
   def index
   end
 
+  def get_location
+    @location = get_current_location
+    redirect_to homes_ask_path(location: @location)
+  end
+
   def ask
     @user = User.new
+    @location = params[:location] 
   end
 
   def answer
@@ -77,5 +85,15 @@ class HomesController < ApplicationController
 
   def user_params
     params.permit(:start_date, :end_date, :people, :budget, :location, :mood,:remarks)
+  end
+
+  def get_current_location
+    result = GoogleGeolocationService.get_location
+
+    if result[:latitude] && result[:longitude]
+      GoogleGeocodingService.reverse_geocode(result[:latitude], result[:longitude])
+    else
+      "位置情報を取得できませんでした"
+    end
   end
 end

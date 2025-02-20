@@ -12,6 +12,15 @@
   <% end %>
 
   <div>
+    <%= label_tag :location, "現在地:" %>
+    <%= text_field_tag :location, @location, required: true, placeholder: "例: 福岡県 福岡市" %>
+    <%= link_to "現在地を取得", homes_get_location_path, method: :post, data: { disable_with: "取得中..." }, params: { location: @location } %>
+  </div>
+  <div>
+    <%= label_tag :mood, "気持ち:" %>
+    <%= text_field_tag :mood, nil, required: true, placeholder: "例: リラックスしたい" %>
+  </div>
+  <div>
     <%= label_tag :start_date, "休日の開始日:" %>
     <%= date_field_tag :start_date, nil, required: true, min: Date.today %>
   </div>
@@ -20,25 +29,13 @@
     <%= date_field_tag :end_date, nil, required: true, min: Date.today %>
     <small>※開始日から5日以内の日付を選択してください</small>
   </div>
-
   <div>
     <%= label_tag :people, "同行する人数:" %>
     <%= select_tag :people, options_for_select((1..5).map { |n| [n, n] }), prompt: "人数を選択", required: true %>
-
-    <%# max: 5 (仮定) %>
   </div>
   <div>
     <%= label_tag :budget, "1人当たりの予算:" %>
     <%= select_tag :budget, options_for_select((0..100000).step(5000).map { |n| [n.to_s(:delimited), n] }), prompt: "予算を選択", required: true %>
-
-  </div>
-  <div>
-    <%= label_tag :location, "現在地:" %>
-    <%= text_field_tag :location, nil, required: true, placeholder: "例: 渋谷ハチ公前" %>
-  </div>
-  <div>
-    <%= label_tag :mood, "気持ち:" %>
-    <%= text_field_tag :mood, nil, required: true, placeholder: "例: リラックスしたい" %>
   </div>
   <div>
     <%= label_tag :remarks, "備考:" %>
