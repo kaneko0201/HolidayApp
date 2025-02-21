@@ -14,7 +14,7 @@ class HomesController < ApplicationController
 
   def ask
     @user = User.new
-    @location = params[:location] 
+    @location = params[:location]
   end
 
   def answer
@@ -42,13 +42,13 @@ class HomesController < ApplicationController
               - あなたは休日の予定を提案する優秀なアシスタントです。
               - ユーザーの質問に対して、日本語で休日の予定の提案書を作成してください。
               - 具体的な行き先を提案してください。
-              - 各行き先の名称は「」で囲ってください。
+              - 各行き先の名称は「」で囲ってください。ただし、行き先が駅の場合は「」で囲わないでください。
                 ※その他の箇所で「」を使用しないでください。
               - タイムスケジュールを組んでください。
               - 休日の日数、人数、予算、現在地、気持ち、備考を考慮してください。
               TEXT
             },
-            { role: "user", content: <<~PROMPT
+            { role: "user", content: <<~TEXT
               休日の開始日: #{start_date}日
               休日の終了日: #{end_date}日
               人数: #{people}人
@@ -56,7 +56,7 @@ class HomesController < ApplicationController
               現在地: #{location}
               気持ち: #{mood}
               備考: #{remarks}
-              PROMPT
+              TEXT
             }
           ],
           max_tokens: 2000,
@@ -75,7 +75,6 @@ class HomesController < ApplicationController
       else
         @answer = "回答が見つかりませんでした"
       end
-
     else
       render :ask
     end

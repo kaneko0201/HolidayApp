@@ -1,47 +1,61 @@
-<h1>Chatbot</h1>
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+  <div class="w-30">
+    <%= form_with url: homes_answer_path, method: :post, local: true, class: "form" do %>
+      <% if @user.errors.any? %>
+        <div class="error-messages alert alert-danger">
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-<%= form_with url: homes_answer_path, method: :post, local: true do %>
-  <% if @user.errors.any? %>
-    <div class="error-messages">
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <div class="form-group">
+        <%= label_tag :location, "現在地:", class: "form-label fw-bold" %>
+        <%= text_field_tag :location, @location, required: true, placeholder: "例: 福岡県 福岡市", class: "form-control" %>
+        <div class="text-end">
+          <%= link_to "現在地を取得", homes_get_location_path, method: :post, data: { disable_with: "取得中..." }, params: { location: @location }, class: "btn btn-primary btn-sm mt-2" %>
+        </div>
+      </div>
 
-  <div>
-    <%= label_tag :location, "現在地:" %>
-    <%= text_field_tag :location, @location, required: true, placeholder: "例: 福岡県 福岡市" %>
-    <%= link_to "現在地を取得", homes_get_location_path, method: :post, data: { disable_with: "取得中..." }, params: { location: @location } %>
+
+      <div class="form-group mb-2">
+        <%= label_tag :mood, "気持ち:", class: "form-label fw-bold" %>
+        <%= text_field_tag :mood, nil, required: true, placeholder: "例: リラックスしたい", class: "form-control" %>
+      </div>
+
+      <div class="form-group mb-2">
+        <%= label_tag :start_date, "休日の開始日:", class: "form-label fw-bold" %>
+        <%= date_field_tag :start_date, nil, required: true, min: Date.today, class: "form-control" %>
+      </div>
+
+      <div class="form-group mb-2">
+        <%= label_tag :end_date, "休日の終了日:", class: "form-label fw-bold" %>
+        <%= date_field_tag :end_date, nil, required: true, min: Date.today, class: "form-control" %>
+        <div class="text-end">
+          <small class="color-w">※開始日から5日以内の日付を選択してください</small>
+        </div>
+      </div>
+
+      <div class="form-group mb-2">
+        <%= label_tag :people, "同行する人数:", class: "form-label fw-bold" %>
+        <%= select_tag :people, options_for_select((1..5).map { |n| [n, n] }), prompt: "人数を選択", required: true, class: "form-control" %>
+      </div>
+
+      <div class="form-group mb-2">
+        <%= label_tag :budget, "1人当たりの予算:", class: "form-label fw-bold" %>
+        <%= select_tag :budget, options_for_select((0..100000).step(5000).map { |n| [n.to_s(:delimited), n] }), prompt: "予算を選択", required: true, class: "form-control" %>
+      </div>
+
+      <div class="form-group mb-2">
+        <%= label_tag :remarks, "備考:", class: "form-label fw-bold" %>
+        <%= text_field_tag :remarks, nil, placeholder: "例: 交通機関を使う", class: "form-control" %>
+      </div>
+
+      <div class="form-group text-end">
+        <%= submit_tag "質問する", class: "btn btn-primary btn-sm" %>
+      </div>
+    <% end %>
   </div>
-  <div>
-    <%= label_tag :mood, "気持ち:" %>
-    <%= text_field_tag :mood, nil, required: true, placeholder: "例: リラックスしたい" %>
-  </div>
-  <div>
-    <%= label_tag :start_date, "休日の開始日:" %>
-    <%= date_field_tag :start_date, nil, required: true, min: Date.today %>
-  </div>
-  <div>
-    <%= label_tag :end_date, "休日の終了日:" %>
-    <%= date_field_tag :end_date, nil, required: true, min: Date.today %>
-    <small>※開始日から5日以内の日付を選択してください</small>
-  </div>
-  <div>
-    <%= label_tag :people, "同行する人数:" %>
-    <%= select_tag :people, options_for_select((1..5).map { |n| [n, n] }), prompt: "人数を選択", required: true %>
-  </div>
-  <div>
-    <%= label_tag :budget, "1人当たりの予算:" %>
-    <%= select_tag :budget, options_for_select((0..100000).step(5000).map { |n| [n.to_s(:delimited), n] }), prompt: "予算を選択", required: true %>
-  </div>
-  <div>
-    <%= label_tag :remarks, "備考:" %>
-    <%= text_field_tag :remarks, nil,placeholder: "例: 交通機関を使う" %>
-  </div>
-  <div>
-    <%= submit_tag "質問する" %>
-  </div>
-<% end %>
+</div>
