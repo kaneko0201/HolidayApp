@@ -1,15 +1,23 @@
+require 'openai'
+require 'net/http'
+require 'json'
+require_relative '../services/google_search_service'
+require_relative '../services/google_geocoding_service'
+
 class HomesController < ApplicationController
-  require 'openai'
-  require_relative '../services/google_search_service'
-  require_relative '../services/google_geolocation_service.rb'
-  require_relative '../services/google_geocoding_service'
+  def update
+    latitude = params[:latitude]
+    longitude = params[:longitude]
 
-  def index
-  end
+    Rails.logger.debug "DEBUG: 受け取った緯度: #{latitude}, 経度: #{longitude}"
 
-  def get_location
-    @location = get_current_location
-    redirect_to homes_ask_path(location: @location)
+    if latitude.present? && longitude.present?
+      address = GoogleGeocodingService.reverse_geocode(latitude, longitude)
+      render json: { address: address }
+      Rails.logger.debug "DEBUG: 取得した住所: #{address}"
+    else
+      render json: { error: "緯度・経度が取得できませんでした" }, status: :unprocessable_entity
+    end
   end
 
   def ask
@@ -42,7 +50,7 @@ class HomesController < ApplicationController
               - あなたは休日の予定を提案する優秀なアシスタントです。
               - ユーザーの質問に対して、日本語で休日の予定の提案書を作成してください。
               - 具体的な行き先を提案してください。
-              - 各行き先の名称は「」で囲ってください。ただし、行き先が駅の場合は「」で囲わないでください。
+              - 各行き先の名称は必ず「」で囲ってください。ただし、行き先が駅の場合は「」で囲わないでください。
                 ※その他の箇所で「」を使用しないでください。
               - タイムスケジュールを組んでください。
               - 休日の日数、人数、予算、現在地、気持ち、備考を考慮してください。
@@ -84,15 +92,5 @@ class HomesController < ApplicationController
 
   def user_params
     params.permit(:start_date, :end_date, :people, :budget, :location, :mood,:remarks)
-  end
-
-  def get_current_location
-    result = GoogleGeolocationService.get_location
-
-    if result[:latitude] && result[:longitude]
-      GoogleGeocodingService.reverse_geocode(result[:latitude], result[:longitude])
-    else
-      "位置情報を取得できませんでした"
-    end
   end
 end

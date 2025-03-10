@@ -1,3 +1,5 @@
+<script src="/js/location.js"></script>
+
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
   <div class="w-30">
     <%= form_with url: homes_answer_path, method: :post, local: true, class: "form" do %>
@@ -13,12 +15,12 @@
 
       <div class="form-group">
         <%= label_tag :location, "現在地:", class: "form-label fw-bold" %>
-        <%= text_field_tag :location, @location, required: true, placeholder: "例: 福岡県 福岡市", class: "form-control" %>
+        <%= text_field_tag :location, nil, required: true, placeholder: "例: 福岡県 福岡市", id: "location-input", class: "form-control" %>
         <div class="text-end">
-          <%= link_to "現在地を取得", homes_get_location_path, method: :post, data: { disable_with: "取得中..." }, params: { location: @location }, class: "btn btn-primary btn-sm mt-2" %>
+          <%= link_to "現在地を取得", "#", id: "get-location-btn", class: "btn btn-primary btn-sm mt-2", data: { disable_with: "取得中..." }
+          %>
         </div>
       </div>
-
 
       <div class="form-group mb-2">
         <%= label_tag :mood, "気持ち:", class: "form-label fw-bold" %>

@@ -1,7 +1,7 @@
 require 'google/apis/customsearch_v1'
 
 module GoogleSearchService
-  API_KEY = ENV["GOOGLE_API_KEY"]
+  API_KEY = ENV["GOOGLE_SEARCH_API_KEY"]
   CX = ENV["GOOGLE_CX"]
 
   def self.search(query)
