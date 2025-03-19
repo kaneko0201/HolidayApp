@@ -9,8 +9,6 @@ class HomesController < ApplicationController
     latitude = params[:latitude]
     longitude = params[:longitude]
 
-    Rails.logger.debug "DEBUG: 受け取った緯度: #{latitude}, 経度: #{longitude}"
-
     if latitude.present? && longitude.present?
       address = GoogleGeocodingService.reverse_geocode(latitude, longitude)
       render json: { address: address }
@@ -22,7 +20,9 @@ class HomesController < ApplicationController
 
   def ask
     @user = User.new
-    @location = params[:location]
+    if flash[:errors].present?
+      flash[:errors].each { |error| @user.errors.add(:base, error) }
+    end
   end
 
   def answer
@@ -83,8 +83,10 @@ class HomesController < ApplicationController
       else
         @answer = "回答が見つかりませんでした"
       end
+      render :answer
     else
-      render :ask
+      flash[:errors] = @user.errors.full_messages
+      redirect_to homes_ask_path
     end
   end
 

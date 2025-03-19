@@ -120,8 +120,8 @@ RSpec.describe HomesController, type: :controller do
       before do
         post :answer, params: { start_date: "", end_date: "", people: "", budget: "", location: "", mood: "", remarks: "" }
       end
-      it "ask テンプレートがレンダリングされる" do
-        expect(response.body).to include("現在地を取得")
+      it "askページがレンダリングされる" do
+        expect(response).to redirect_to(homes_ask_path)
       end
     end
   end

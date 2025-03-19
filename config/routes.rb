@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   get 'homes/ask', to: 'homes#ask'
   get 'homes/answer', to: 'homes#answer'
   post 'homes/answer', to: 'homes#answer'
-  post "homes/update", to: "homes#update"
+  post 'homes/update', to: 'homes#update'
 end

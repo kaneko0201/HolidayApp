@@ -1,7 +1,7 @@
 <div class="background-image-1">
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
   <div class="w-30">
-    <%= form_with url: homes_answer_path, method: :post, local: true, class: "form" do %>
+    <%= form_with model: @user, url: homes_answer_path, method: :post, local: true do |f| %>
       <% if @user.errors.any? %>
         <div class="error-messages alert alert-danger">
           <ul>
@@ -58,5 +58,5 @@
       </div>
     <% end %>
   </div>
-  <script src="/js/location.js" defer></script>
 </div>
+<script src="/js/location.js" defer></script>
