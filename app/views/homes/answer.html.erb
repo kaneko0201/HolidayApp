@@ -1,0 +1,36 @@
+<div class="background-image-1">
+<div class="container p-3">
+  <strong><p class="mt-4 fs-3">アシスタントの回答</p></strong>
+  <div class="alert alert-light border">
+    <%= simple_format(@answer) %>
+  </div>
+
+  <% if @search_results.present? %>
+    <strong><p class="mt-4 fs-3">関連する公式サイト</p></strong>
+    <ul class="list-group">
+      <% @search_results.each do |place_data| %>
+        <li class="list-group-item">
+          <strong><%= place_data[:name] %></strong>
+          <% if place_data[:results].present? %>
+            <ul class="list-group mt-2">
+              <% place_data[:results].first(3).each do |result| %>
+                <li class="list-group-item">
+                  <a href="<%= result.link %>" target="_blank" class="text-decoration-none">
+                    <%= result.title %>
+                  </a><br>
+                  <small class="text-muted"><%= result.snippet %></small>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="text-muted">公式サイトが見つかりませんでした。</p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="text-center mt-4">
+    <%= link_to "別の質問をする", homes_ask_path, class: "btn btn-primary", data: { turbolinks: false } %>
+  </div>
+</div>
