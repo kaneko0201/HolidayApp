@@ -34,6 +34,7 @@ gem 'ruby-openai'
 gem 'dotenv-rails'
 gem 'google-apis-customsearch_v1'
 gem 'pry-byebug'
+gem 'net-pop', '~> 0.1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
