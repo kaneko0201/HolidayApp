@@ -361,6 +361,7 @@ DEPENDENCIES
   google-apis-customsearch_v1
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  net-pop (~> 0.1.2)
   popper_js (~> 2.0)
   pry-byebug
   puma (~> 5.0)
