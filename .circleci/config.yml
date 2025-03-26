@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: circleci/ruby:3.3.3-node
+      - image: cimg/ruby:3.3.3
         environment:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
@@ -24,7 +24,7 @@ workflows:
 
 deploy:
   docker:
-    - image: circleci/ruby:3.3.3-node
+    - image: cimg/ruby:3.3.3
   steps:
     - checkout
     - run:
