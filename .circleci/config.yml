@@ -1,0 +1,36 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/ruby:3.3.3-node
+        environment:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: bundle install --path vendor/bundle
+      - run:
+          name: Run Tests
+          command: bundle exec rspec
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
+
+deploy:
+  docker:
+    - image: circleci/ruby:3.3.3-node
+  steps:
+    - checkout
+    - run:
+        name: Install Heroku CLI
+        command: curl https://cli-assets.heroku.com/install.sh | sh
+    - run:
+        name: Deploy to Heroku
+        command: git push heroku main
+
