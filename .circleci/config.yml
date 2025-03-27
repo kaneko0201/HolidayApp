@@ -28,8 +28,7 @@ jobs:
 
   deploy:
       machine: true
-      image: ubuntu-22.04
-    steps:
+      steps:
       - checkout
       - run:
           name: Install Heroku CLI
@@ -45,4 +44,4 @@ workflows:
       - test
       - deploy:
           requires:
-            - test  
+            - test
