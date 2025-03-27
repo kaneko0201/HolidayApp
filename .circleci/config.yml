@@ -2,8 +2,7 @@ version: 2.1
 
 jobs:
   test:
-    machine:
-      image: ubuntu-2204
+    machine: true
     steps:
       - checkout
       - run:
@@ -27,21 +26,23 @@ jobs:
           name: Clear Cache
           command: rm -rf ~/.cache/yarn ~/.bundle
 
+  deploy:
+      machine: true
+      image: ubuntu-22.04
+    steps:
+      - checkout
+      - run:
+          name: Install Heroku CLI
+          command: curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: Deploy to Heroku
+          command: git push heroku main
+
 workflows:
   version: 2
-  test:
+  test_and_deploy:
     jobs:
       - test
-
-deploy:
-  machine:
-    image: ubuntu-22.04
-  steps:
-    - checkout
-    - run:
-        name: Install Heroku CLI
-        command: curl https://cli-assets.heroku.com/install.sh | sh
-    - run:
-        name: Deploy to Heroku
-        command: git push heroku main
-
+      - deploy:
+          requires:
+            - test  
