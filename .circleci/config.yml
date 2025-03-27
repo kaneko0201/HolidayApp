@@ -2,19 +2,30 @@ version: 2.1
 
 jobs:
   test:
-    docker:
-      - image: cimg/ruby:3.3.3
-        environment:
-          BUNDLE_JOBS: 4
-          BUNDLE_RETRY: 3
+    machine:
+      image: ubuntu-22.04
     steps:
       - checkout
       - run:
-          name: Install dependencies
-          command: bundle install --path vendor/bundle
+          name: Install Dependencies
+          command: |
+            sudo apt update
+            sudo apt install -y nodejs npm
+            node -v
+      - run:
+          name: Install Ruby & Bundler
+          command: |
+            sudo apt install -y ruby-full
+            gem install bundler
+      - run:
+          name: Install Gems
+          command: bundle install
       - run:
           name: Run Tests
           command: bundle exec rspec
+      - run:
+          name: Clear Cache
+          command: rm -rf ~/.cache/yarn ~/.bundle
 
 workflows:
   version: 2
@@ -24,7 +35,7 @@ workflows:
 
 deploy:
   docker:
-    - image: cimg/ruby:3.3.3
+    - image: circleci/ruby:3.3.3-node
   steps:
     - checkout
     - run:

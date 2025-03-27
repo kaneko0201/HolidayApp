@@ -1,6 +1,10 @@
 require_relative "boot"
+
 require 'dotenv'
 Dotenv.load
+
+require 'execjs'
+ExecJS.runtime = ExecJS::MiniRacerRuntime.new
 
 require "rails/all"
 

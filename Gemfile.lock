@@ -168,6 +168,12 @@ GEM
     json (2.10.2)
     jwt (2.10.1)
       base64
+    libv8-node (23.6.1.0)
+    libv8-node (23.6.1.0-aarch64-linux)
+    libv8-node (23.6.1.0-arm64-darwin)
+    libv8-node (23.6.1.0-x86_64-darwin)
+    libv8-node (23.6.1.0-x86_64-linux)
+    libv8-node (23.6.1.0-x86_64-linux-musl)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -184,6 +190,8 @@ GEM
     matrix (0.4.2)
     method_source (1.1.0)
     mini_mime (1.1.5)
+    mini_racer (0.18.0)
+      libv8-node (~> 23.6.1.0)
     minitest (5.25.5)
     msgpack (1.8.0)
     multi_json (1.15.0)
@@ -357,6 +365,8 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
+    uglifier (4.2.1)
+      execjs (>= 0.3.0, < 3)
     uri (1.0.3)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -403,6 +413,7 @@ DEPENDENCIES
   google-apis-customsearch_v1
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mini_racer
   net-pop (~> 0.1.2)
   net-protocol (= 0.2.2)
   popper_js (~> 2.0)
@@ -419,6 +430,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
+  uglifier
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
