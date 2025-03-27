@@ -31,7 +31,6 @@ gem 'bootstrap', '~> 5.3.0'
 gem 'popper_js', '~> 2.0'
 gem 'sassc-rails'
 gem 'ruby-openai'
-gem 'dotenv-rails'
 gem 'google-apis-customsearch_v1'
 gem 'pry-byebug'
 gem 'net-pop', '~> 0.1.2'
@@ -41,6 +40,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
