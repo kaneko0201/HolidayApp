@@ -12,10 +12,17 @@ jobs:
             sudo apt install -y nodejs npm
             node -v
       - run:
-          name: Install Ruby & Bundler
+          name: Install rbenv & Ruby
           command: |
-            sudo apt install -y ruby-full
-            gem install bundler
+            sudo apt install -y rbenv
+            export PATH="$HOME/.rbenv/bin:$PATH"
+            eval "$(rbenv init -)"
+            rbenv install 3.3.3
+            rbenv global 3.3.3
+            ruby -v
+      - run:
+          name: Install Bundler
+          command: gem install bundler
       - run:
           name: Install Gems
           command: bundle install
