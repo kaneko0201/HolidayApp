@@ -13,6 +13,10 @@ jobs:
             sudo apt update
             sudo apt install -y nodejs npm
       - run:
+          name: Install Yarn
+          command: |
+            npm install -g yarn
+      - run:
           name: Install dependencies
           command: |
             bundle install
