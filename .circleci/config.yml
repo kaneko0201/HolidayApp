@@ -8,10 +8,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Node.js
-          command: |
-            sudo apt update
-            sudo apt install -y nodejs npm
+          name: Check Node.js version
+          command: node -v  
       - run:
           name: Set up npm global path
           command: |
