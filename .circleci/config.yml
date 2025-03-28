@@ -9,7 +9,14 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: bundle install
+          command: |
+            bundle install
+            yarn install
+      - run:
+          name: Precompile Assets
+          command: |
+            bundle exec rails webpacker:compile
+            bundle exec rake assets:precompile
       - run:
           name: Run Tests
           command: bundle exec rspec
