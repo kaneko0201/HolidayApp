@@ -177,7 +177,7 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.6.6)
+    logger (1.7.0)
     loofah (2.24.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -203,7 +203,6 @@ GEM
       date
       net-protocol
     net-pop (0.1.2)
-      net-protocol
     net-protocol (0.2.2)
       timeout
     net-smtp (0.5.1)
@@ -365,8 +364,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
-    uglifier (4.2.1)
-      execjs (>= 0.3.0, < 3)
     uri (1.0.3)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -430,7 +427,6 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
-  uglifier
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)

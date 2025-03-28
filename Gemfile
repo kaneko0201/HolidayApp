@@ -36,7 +36,6 @@ gem 'pry-byebug'
 gem 'net-pop', '~> 0.1.2'
 gem 'net-protocol', '0.2.2'
 gem 'mini_racer'
-gem 'uglifier'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
