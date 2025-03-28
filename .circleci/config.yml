@@ -2,44 +2,29 @@ version: 2.1
 
 jobs:
   test:
-    machine: true
+    docker:
+      - image: cimg/ruby:3.3.3
+      - image: cimg/node:18.16.0
     steps:
       - checkout
       - run:
-          name: Install Dependencies
-          command: |
-            sudo apt update
-            sudo apt install -y nodejs npm
-            node -v
-      - run:
-          name: Install rbenv & Ruby
-          command: |
-            sudo apt install -y rbenv
-            export PATH="$HOME/.rbenv/bin:$PATH"
-            eval "$(rbenv init -)"
-            rbenv install 3.3.3
-            rbenv global 3.3.3
-            ruby -v
-      - run:
-          name: Install Bundler
-          command: gem install bundler
-      - run:
-          name: Install Gems
+          name: Install dependencies
           command: bundle install
       - run:
           name: Run Tests
           command: bundle exec rspec
-      - run:
-          name: Clear Cache
-          command: rm -rf ~/.cache/yarn ~/.bundle
 
   deploy:
-      machine: true
-      steps:
+    docker:
+      - image: cimg/ruby:3.3.3
+    steps:
       - checkout
       - run:
           name: Install Heroku CLI
           command: curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: Authenticate with Heroku
+          command: echo $HEROKU_API_KEY | heroku auth:token
       - run:
           name: Deploy to Heroku
           command: git push heroku main
