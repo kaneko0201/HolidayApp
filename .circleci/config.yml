@@ -11,6 +11,7 @@ jobs:
           name: Install dependencies
           command: |
             bundle install
+            npm install -g yarn 
             yarn install
       - run:
           name: Precompile Assets
