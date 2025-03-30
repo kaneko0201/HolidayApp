@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/ruby:3.3.3-node 
+      - image: cimg/ruby:3.3.3-node
     steps:
       - checkout
       - run:
@@ -25,11 +25,6 @@ jobs:
           command: |
             bundle install
             yarn install
-      - run:
-          name: Precompile Assets
-          command: |
-            bundle exec rails webpacker:compile
-            bundle exec rake assets:precompile
       - run:
           name: Run Tests
           command: bundle exec rspec
