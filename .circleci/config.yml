@@ -1,0 +1,37 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/ruby:3.3.3-browsers
+      - image: cimg/node:18.16.0
+    steps:
+      - checkout
+      - run:
+          name: Check Node.js version
+          command: node -v
+      - run:
+          name: Set up npm global path
+          command: |
+            mkdir -p $HOME/.npm-global
+            npm config set prefix $HOME/.npm-global
+            export PATH=$HOME/.npm-global/bin:$PATH
+            echo 'export PATH=$HOME/.npm-global/bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Install Yarn
+          command: |
+            npm install -g yarn
+      - run:
+          name: Install dependencies
+          command: |
+            bundle install
+            yarn install
+      - run:
+          name: Run Tests
+          command: bundle exec rspec
+
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test

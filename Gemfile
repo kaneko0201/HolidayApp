@@ -31,16 +31,18 @@ gem 'bootstrap', '~> 5.3.0'
 gem 'popper_js', '~> 2.0'
 gem 'sassc-rails'
 gem 'ruby-openai'
-gem 'dotenv-rails'
 gem 'google-apis-customsearch_v1'
 gem 'pry-byebug'
 gem 'net-pop', '~> 0.1.2'
 gem 'net-protocol', '0.2.2'
+gem 'mini_racer'
+gem 'rubyzip', '~> 2.3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -57,9 +59,9 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.0.0.rc1'
+  gem 'selenium-webdriver', '< 4.11'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers', '~> 5.3'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

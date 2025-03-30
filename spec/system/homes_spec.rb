@@ -6,7 +6,15 @@ RSpec.describe "Homes", type: :system do
   end
 
   describe "質問フォームの動作" do
-    before { visit homes_ask_path }
+    before do
+      visit homes_ask_path
+
+      page.execute_script <<~JS
+        navigator.geolocation.getCurrentPosition = function(success, error) {
+          success({ coords: { latitude: 35.6586, longitude: 139.7454 } });
+        };
+      JS
+    end
 
     context "正常な入力で質問を送信した場合" do
       before do
@@ -40,9 +48,9 @@ RSpec.describe "Homes", type: :system do
       end
 
       it "AIの回答が表示される" do
-        expect(page).to have_content("おすすめの旅行プラン")
-        expect(page).to have_content("箱根温泉")
-        expect(page).to have_content("富士山")
+        expect(page).to have_content("おすすめの旅行プラン", wait: 10)
+        expect(page).to have_content("箱根温泉", wait: 10)
+        expect(page).to have_content("富士山", wait: 10)
       end
 
       it "関連する公式サイトが表示される" do
