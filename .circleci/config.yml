@@ -3,7 +3,8 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/ruby:3.3.3-node
+      - image: cimg/ruby:3.3.3-browsers
+      - image: cimg/node:18.16.0
     steps:
       - checkout
       - run:
@@ -29,26 +30,8 @@ jobs:
           name: Run Tests
           command: bundle exec rspec
 
-  deploy:
-    docker:
-      - image: cimg/ruby:3.3.3
-    steps:
-      - checkout
-      - run:
-          name: Install Heroku CLI
-          command: curl https://cli-assets.heroku.com/install.sh | sh
-      - run:
-          name: Authenticate with Heroku
-          command: echo $HEROKU_API_KEY | heroku auth:token
-      - run:
-          name: Deploy to Heroku
-          command: git push heroku main
-
 workflows:
   version: 2
   test_and_deploy:
     jobs:
       - test
-      - deploy:
-          requires:
-            - test
