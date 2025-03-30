@@ -92,3 +92,20 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+Capybara.register_driver :headless_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+
+  # Headless モードで実行
+  options.add_argument("--headless")
+
+  # 位置情報を許可
+  options.add_argument("--use-fake-ui-for-media-stream")
+  options.add_argument("--use-fake-device-for-media-stream")
+  options.add_argument("--disable-geolocation")
+
+  # WebDriver の設定
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.javascript_driver = :headless_chrome
