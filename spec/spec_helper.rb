@@ -103,7 +103,7 @@ Capybara.register_driver :headless_chrome do |app|
   # 位置情報を許可
   options.add_argument("--use-fake-ui-for-media-stream")
   options.add_argument("--use-fake-device-for-media-stream")
-  options.add_argument("--disable-geolocation")
+  options.add_argument("--enable-geolocation")
 
   # WebDriver の設定
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
