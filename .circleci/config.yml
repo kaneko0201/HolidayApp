@@ -30,6 +30,32 @@ jobs:
           name: Run Tests
           command: bundle exec rspec
 
+  deploy:
+    docker:
+      - image: cimg/ruby:3.3.3
+    steps:
+      - checkout
+      - run:
+          name: Install Heroku CLI
+          command: |
+            curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: Login to Heroku
+          command: |
+            echo $HEROKU_API_KEY | heroku auth:token
+      - run:
+          name: Set Heroku remote
+          command: |
+            heroku git:remote -a $HEROKU_APP_NAME
+      - run:
+          name: Deploy to Heroku
+          command: |
+            git push heroku main
+      - run:
+          name: Run Database Migrations
+          command: |
+            heroku run rake db:migrate
+            
 workflows:
   version: 2
   test_and_deploy:
