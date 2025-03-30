@@ -55,9 +55,15 @@ jobs:
           name: Run Database Migrations
           command: |
             heroku run rake db:migrate
-            
+
 workflows:
   version: 2
   test_and_deploy:
     jobs:
       - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
