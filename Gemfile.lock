@@ -422,7 +422,7 @@ DEPENDENCIES
   mini_racer
   net-pop (~> 0.1.2)
   net-protocol (= 0.2.2)
-  nokogiri (>= 1.13.0)
+  nokogiri (~> 1.18)
   pg
   popper_js (~> 2.0)
   pry-byebug
