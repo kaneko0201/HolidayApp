@@ -31,6 +31,7 @@ jobs:
       - name: Release image on Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
           curl -n -X PATCH https://api.heroku.com/apps/${{ secrets.HEROKU_APP_NAME }}/formation \
             -d '{ "updates": [ { "type": "web", "docker_image": "'"$(docker inspect --format={{.Id}} registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web)"'" } ] }' \
