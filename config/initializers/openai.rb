@@ -1,4 +1,4 @@
 OpenAI.configure do |config|
-  config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
-  config.log_errors = false 
+  config.access_token = ENV["OPENAI_ACCESS_TOKEN"] || "dummy"
+  config.log_errors = false
 end
