@@ -1,7 +1,9 @@
 require_relative "boot"
 
-require 'dotenv'
-Dotenv.load
+if ['development', 'test'].include?(ENV['RAILS_ENV'] || ENV['RACK_ENV'])
+  require 'dotenv'
+  Dotenv.load
+end
 
 require 'execjs'
 ExecJS.runtime = ExecJS::MiniRacerRuntime.new
