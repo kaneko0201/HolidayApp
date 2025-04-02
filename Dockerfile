@@ -16,9 +16,11 @@ ENV RAILS_ENV=production
 ENV BUNDLE_WITHOUT=development:test
 
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:2.5.23 && bundle install
+RUN gem install bundler:2.5.23 && bundle install --jobs 4 --retry 3
 
 COPY . .
+
+RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
 
