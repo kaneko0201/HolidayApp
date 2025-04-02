@@ -12,6 +12,9 @@ RUN apt-get update -qq && apt-get install -y \
 
 WORKDIR /app
 
+ENV RAILS_ENV=production
+ENV BUNDLE_WITHOUT=development:test
+
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler:2.5.23 && bundle install
 
