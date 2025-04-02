@@ -16,12 +16,13 @@ RUN npm install -g yarn@1.22.19
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:2.5.23 && bundle install
+RUN gem install bundler:2.5.23 && bundle install --deployment --without development test
 
 COPY . .
 
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+COPY config/credentials/production.key config/credentials/production.key
 RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
