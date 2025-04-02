@@ -20,8 +20,12 @@ jobs:
           echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
 
       - name: Build and Push Docker image
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
-          docker build -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web .
+          docker build \
+            --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY \
+            -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web .
           docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
 
       - name: Release image on Heroku
