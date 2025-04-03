@@ -32,7 +32,6 @@ gem 'ruby-openai'
 gem 'google-apis-customsearch_v1'
 gem 'pry-byebug'
 gem 'net-pop', '~> 0.1.2'
-gem 'net-protocol', '0.2.2'
 gem 'rubyzip', '~> 2.3.0'
 gem "mini_racer", "~> 0.18.0"
 
