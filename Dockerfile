@@ -1,3 +1,5 @@
+ENV NODE_OPTIONS=--max-old-space-size=2048
+
 FROM ruby:3.3.3
 
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
