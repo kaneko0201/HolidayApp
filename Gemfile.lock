@@ -179,7 +179,7 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
-    mini_racer (0.18.0)
+    mini_racer (0.18.1)
       libv8-node (~> 23.6.1.0)
     minitest (5.25.5)
     msgpack (1.8.0)
