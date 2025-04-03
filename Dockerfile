@@ -22,7 +22,8 @@ RUN gem install bundler:2.5.23 \
  && bundle config set deployment true \
  && bundle config set without 'development test'
 
-RUN bundle install --jobs=1 --retry=3
+ RUN bundle config set build.libv8-node --disable-system-v8 \
+ && bundle install --jobs=1 --retry=3
 
 COPY . .
 
