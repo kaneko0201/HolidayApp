@@ -16,7 +16,11 @@ RUN npm install -g yarn@1.22.19
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:2.5.23 && bundle install --deployment --without development test
+RUN gem install bundler:2.5.23 \
+ && bundle config set deployment true \
+ && bundle config set without 'development test'
+
+RUN bundle install --jobs=1 --retry=3
 
 COPY . .
 
