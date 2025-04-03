@@ -162,8 +162,6 @@ GEM
     json (2.10.2)
     jwt (2.10.1)
       base64
-    libv8-node (23.6.1.0)
-    libv8-node (23.6.1.0-x86_64-linux)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -181,8 +179,6 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
-    mini_racer (0.18.1)
-      libv8-node (~> 23.6.1.0)
     minitest (5.25.5)
     msgpack (1.8.0)
     multi_json (1.15.0)
@@ -194,7 +190,7 @@ GEM
       date
       net-protocol
     net-pop (0.1.2)
-      net-protocol (>= 0)
+      net-protocol
     net-protocol (0.2.2)
       timeout
     net-smtp (0.5.1)
@@ -382,7 +378,6 @@ DEPENDENCIES
   google-apis-customsearch_v1
   jbuilder (~> 2.7)
   listen (~> 3.3)
-  mini_racer (~> 0.18.0)
   net-pop (~> 0.1.2)
   nokogiri (= 1.18.7)
   pg

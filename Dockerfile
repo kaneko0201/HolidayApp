@@ -20,16 +20,24 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler:2.5.23 \
  && bundle config set deployment true \
- && bundle config set without 'development test'
+ && bundle config set without 'test'
 
  RUN bundle config set build.libv8-node --disable-system-v8 \
  && bundle install --jobs=1 --retry=3
 
 COPY . .
 
-ARG RAILS_MASTER_KEY
-ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-COPY config/credentials/production.key config/credentials/production.key
+
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# credentials を使わない場合、SECRET_KEY_BASE を自前でセット
+ENV RAILS_ENV=production
+
+# assets:precompile に SECRET_KEY_BASE が必要なら、事前に渡す
+# Docker run 時に渡してもOKだけど、ここで必要なら ARG で受け取って ENV に変換しておくとよい
+ARG SECRET_KEY_BASE
+ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
+
 RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
