@@ -6,7 +6,7 @@ if ['development', 'test'].include?(ENV['RAILS_ENV'] || ENV['RACK_ENV'])
 end
 
 require 'execjs'
-ExecJS.runtime = ExecJS::MiniRacerRuntime.new
+ExecJS.runtime = ExecJS::Runtimes::Node
 
 require "rails/all"
 
