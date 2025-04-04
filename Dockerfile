@@ -27,18 +27,15 @@ RUN gem install bundler:2.5.23 \
 
 COPY . .
 
-
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
-# credentials を使わない場合、SECRET_KEY_BASE を自前でセット
 ENV RAILS_ENV=production
+ENV RAILS_SERVE_STATIC_FILES=1
 
-# assets:precompile に SECRET_KEY_BASE が必要なら、事前に渡す
-# Docker run 時に渡してもOKだけど、ここで必要なら ARG で受け取って ENV に変換しておくとよい
-ARG SECRET_KEY_BASE
-ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
 
-RUN bundle exec rake assets:precompile
+
+# RUN bundle exec rake assets:precompile && \
+#     bundle exec rails webpacker:compile
 
 EXPOSE 3000
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
