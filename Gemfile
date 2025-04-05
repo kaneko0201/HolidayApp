@@ -35,7 +35,7 @@ gem 'net-pop', '~> 0.1.2'
 gem 'rubyzip', '~> 2.3.0'
 # gem "mini_racer", "~> 0.18.0"
 
-group :development, :test doa
+group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
@@ -64,9 +64,6 @@ end
 
 group :production do
   gem 'pg'
-  gem 'nokogiri', '1.18.7'
-  gem 'ffi', '1.17.1'
-  gem 'mini_portile2', '2.8.8'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
