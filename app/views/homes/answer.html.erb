@@ -15,7 +15,7 @@
             <ul class="list-group mt-2">
               <% place_data[:results].first(3).each do |result| %>
                 <li class="list-group-item">
-                  <a href="<%= result.link %>" target="_blank" class="text-decoration-none">
+                  <a href="<%= result.link %>" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
                     <%= result.title %>
                   </a><br>
                   <small class="text-muted"><%= result.snippet %></small>
