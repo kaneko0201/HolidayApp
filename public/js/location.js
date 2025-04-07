@@ -10,7 +10,7 @@ function initLocationButton() {
 
   if (!locationButton.dataset.listenerAdded) {
     locationButton.addEventListener("click", handleLocationClick);
-    locationButton.dataset.listenerAdded = "true"; 
+    locationButton.dataset.listenerAdded = "true";
   }
 
   function handleLocationClick(event) {
@@ -20,15 +20,20 @@ function initLocationButton() {
 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
-        function (position) {
+        (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           sendLocationToServer(latitude, longitude);
         },
-        function (error) {
-          console.error("位置情報の取得に失敗しました:", error.message);
-          alert("位置情報の取得に失敗しました。");
+        (error) => {
+          console.error("位置情報取得失敗:", error.message);
+          alert("位置情報の取得に失敗しました。手動で入力してください。");
           resetButton();
+        },
+        {
+          enableHighAccuracy: false,
+          timeout: 5000,
+          maximumAge: 0
         }
       );
     } else {
