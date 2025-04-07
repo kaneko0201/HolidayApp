@@ -5,8 +5,6 @@ module GoogleGeocodingService
   API_KEY = ENV["GOOGLE_MAPS_API_KEY"]
 
   def self.reverse_geocode(latitude, longitude)
-    Rails.logger.debug "DEBUG: Google API に送信する緯度: #{latitude}, 経度: #{longitude}"
-
     uri = URI("https://maps.googleapis.com/maps/api/geocode/json?latlng=#{latitude},#{longitude}&key=#{API_KEY}&language=ja")
     response = Net::HTTP.get(uri)
     result = JSON.parse(response)
