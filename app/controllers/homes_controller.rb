@@ -12,7 +12,6 @@ class HomesController < ApplicationController
     if latitude.present? && longitude.present?
       address = GoogleGeocodingService.reverse_geocode(latitude, longitude)
       render json: { address: address }
-      Rails.logger.debug "DEBUG: 取得した住所: #{address}"
     else
       render json: { error: "緯度・経度が取得できませんでした" }, status: :unprocessable_entity
     end
@@ -44,7 +43,7 @@ class HomesController < ApplicationController
 
       response = client.chat(
         parameters: {
-          model: "gpt-4o-mini",#本番環境での使用には日付ありの GPT モデルが推奨
+          model: "gpt-4o-mini",
           messages: [
             { role: "system", content: <<~TEXT
               - あなたは休日の予定を提案する優秀なアシスタントです。
