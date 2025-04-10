@@ -5,20 +5,13 @@ RSpec.describe "Homes", type: :system do
     driven_by(:selenium, using: :headless_chrome)
   end
 
-  describe "質問フォームの動作" do
+  describe "質問フォームの動作", js: true do
     before do
       visit homes_ask_path
-
-      page.execute_script <<~JS
-        navigator.geolocation.getCurrentPosition = function(success, error) {
-          success({ coords: { latitude: 35.6586, longitude: 139.7454 } });
-        };
-      JS
     end
 
     context "正常な入力で質問を送信した場合" do
       before do
-        click_button "現在地を取得"
         fill_in "location-input", with: "東京都渋谷区"
         fill_in "mood", with: "リラックス"
         fill_in "start_date", with: Date.today

@@ -13,14 +13,18 @@ function initLocationButton() {
     locationButton.dataset.listenerAdded = "true";
   }
 
+  let watchId = null;
+
   function handleLocationClick(event) {
     event.preventDefault();
+
     locationButton.textContent = "取得中...";
     locationButton.disabled = true;
 
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
+      watchId = navigator.geolocation.watchPosition(
         (position) => {
+          navigator.geolocation.clearWatch(watchId);
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           sendLocationToServer(latitude, longitude);
@@ -31,9 +35,9 @@ function initLocationButton() {
           resetButton();
         },
         {
-          enableHighAccuracy: false,
-          timeout: 5000,
-          maximumAge: 0
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
         }
       );
     } else {
@@ -53,7 +57,6 @@ function initLocationButton() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("サーバーのレスポンス:", data);
         if (data.address) {
           locationInput.value = data.address;
         }
