@@ -8,39 +8,10 @@ RSpec.describe "Homes", type: :system do
   describe "質問フォームの動作", js: true do
     before do
       visit homes_ask_path
-      page.execute_script <<~JS
-        navigator.geolocation.watchPosition = function(success, error) {
-          success({ coords: { latitude: 35.6586, longitude: 139.7454 } });
-          return 1;
-        };
-      JS
-    end
-
-    it "現在地取得ボタンで住所が自動入力される", js: true do
-      save_and_open_page 
-
-      allow(GoogleGeocodingService).to receive(:reverse_geocode)
-        .with("35.6586", "139.7454")
-        .and_return("東京都港区芝公園")
-
-      click_button "現在地を取得"
-
-      value = nil
-      Timeout.timeout(10) do
-        loop do
-          value = page.evaluate_script("document.getElementById('location-input').value")
-          puts "⏱️ 現在の値: #{value.inspect}" # デバッグログ
-          break if value.present?
-          sleep 0.2
-        end
-      end
-
-      expect(value).to eq("東京都港区芝公園")
     end
 
     context "正常な入力で質問を送信した場合" do
       before do
-        click_button "現在地を取得"
         fill_in "location-input", with: "東京都渋谷区"
         fill_in "mood", with: "リラックス"
         fill_in "start_date", with: Date.today

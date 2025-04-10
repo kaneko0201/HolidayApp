@@ -1,15 +1,6 @@
-document.addEventListener("turbo:load", initLocationButton);
 document.addEventListener("DOMContentLoaded", function() {
   initLocationButton();
 });
-
-window.JS_LOGS = [];
-
-const originalLog = console.log;
-console.log = function(...args) {
-  window.JS_LOGS.push(args.join(" "));
-  originalLog.apply(console, args);
-};
 
 function initLocationButton() {
   const locationButton = document.getElementById("get-location-btn");
