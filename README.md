@@ -1,24 +1,33 @@
 # 作品
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+サイトURL
+https://holiday-app-1-94ec011ee64f.herokuapp.com/homes/ask
 
-Things you may want to cover:
+# アプリについて
+ユーザーが旅行やおでかけプランについて質問し、AIや検索結果から回答を得ることができます。ユーザーの気持ちを入力できるので回答のミスマッチが起こりにくいかと思います。
 
-* Ruby version
+# 技術
 
-* System dependencies
+Frontend
+| 使用技術  | 詳細 |
+| ------------- | ------------- |
+| Bootstrap5  | Webサイトの見た目を簡単に整えるためのフレームワーク  |
+| Geolocation API  | GPS、IPアドレス、無線LAN、WiFiなどから位置情報を取得  |
 
-* Configuration
+Backend
+| 使用技術  | 詳細 |
+| ------------- | ------------- |
+| Rails7 (7.1.3)  | Webアプリ開発のためのフルスタックなフレームワーク  |
+| Rspec  | リクエストスペック・モデルスペックのテストを実行  |
 
-* Database creation
+外部API
+| 使用技術  | 詳細 |
+| ------------- | ------------- |
+| OpenAI API  | gpt-4o-miniによる旅行プラン生成  |
+| Google Geocoding API  | 位置情報から住所を取得  |
+| Google Custom Search API  | 関連する公式サイトの検索  |
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+デプロイ
+| 使用技術  | 詳細 |
+| ------------- | ------------- |
+| Heroku  | アプリの開発・運用を効率的に行うためのクラウドプラットフォーム  |
