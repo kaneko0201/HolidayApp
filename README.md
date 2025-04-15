@@ -38,6 +38,27 @@ https://holiday-app-1-94ec011ee64f.herokuapp.com/homes/ask
 
 <img width="781" alt="スクリーンショット 2025-04-14 15 24 04" src="https://github.com/user-attachments/assets/b0aaa564-f664-43b5-9b63-689f091d167b" />
 
+### 現在地機能
+ワンクリックで今いる場所からすぐに出発したいときに便利
+
+![202504151317-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/887b4848-7a71-411b-9028-367c6c46cc0d)
+
+### おでかけプラン生成
+入力内容を元に、OpenAIが以下のような内容を自動で生成します：
+
+・日ごとの訪問先（観光地・温泉・アクティビティなど）
+
+・各スポットの簡単な紹介
+
+・手動で調べる時間が不要 → 時短
+
+![202504151354-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/227e80e8-bc3f-4b65-9d5a-2cc547cf8a86)
+
+### 関連サイトの表示
+AIが提案するスポットに対して、Google検索結果から公式サイトリンクを自動取得。そのまま予約や下調べもスムーズ。
+
+![202504151357-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ff0ef278-7d35-4284-86f6-a7c6ed481f76)
+
 
 
 
