@@ -57,19 +57,12 @@ AIが提案するスポットに対して、Google検索結果から公式サイ
 
 ![202504151357-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ff0ef278-7d35-4284-86f6-a7c6ed481f76)
 
+### 開発にあたって
+大学の4年間田んぼだらけの土地で生活、社会人1年目は離島でした。
+外出したくても何がどこにあるのか調べるのに苦労しました。
+このアプリは、過去の自分のように転勤が多い方や新しい土地に馴染めない方に向けて、休日の選択肢にプラス1できるように考えました。
 
-
-
-
-
-
-
-
-
-
-
-
-
+### 使用したアイコンのサイト様
 
 <a target="_blank" href="https://icons8.com/icon/PndQWK6M1Hjo/bootstrap">ブートストラップ</a> アイコン by <a target="_blank" href="https://icons8.com">Icons8</a>
 
