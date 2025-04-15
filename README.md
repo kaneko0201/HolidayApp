@@ -50,8 +50,6 @@ https://holiday-app-1-94ec011ee64f.herokuapp.com/homes/ask
 
 ・各スポットの簡単な紹介
 
-・手動で調べる時間が不要 → 時短
-
 ![202504151354-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/227e80e8-bc3f-4b65-9d5a-2cc547cf8a86)
 
 ### 関連サイトの表示
