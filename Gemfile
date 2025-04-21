@@ -30,7 +30,8 @@ gem 'google-apis-customsearch_v1'
 gem 'pry-byebug'
 gem 'net-pop', '~> 0.1.2'
 gem 'rubyzip', '~> 2.3.0'
-# gem "mini_racer", "~> 0.18.0"
+gem "tailwindcss-ruby", "~> 4.1"
+gem "tailwindcss-rails", "~> 4.2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

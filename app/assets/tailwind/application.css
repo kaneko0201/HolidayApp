@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+.background-image-1{
+	background-image: url(train-3758523_1920.jpg);
+	background-size:cover;
+}
+
+.error-messages {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+}
