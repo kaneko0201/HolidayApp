@@ -11,7 +11,7 @@ https://holiday-app-1-94ec011ee64f.herokuapp.com/homes/ask
 フロントエンド
 | 使用技術  | 詳細 |
 | ------------- | ------------- |
-| Bootstrap5  | Webサイトの見た目を簡単に整えるためのフレームワーク  |
+| Tailwind css 4  | クラスを組み合わせることで、柔軟なレイアウトとデザインが可能  |
 | Geolocation API  | GPS、IPアドレス、無線LAN、WiFiなどから位置情報を取得  |
 
 バックエンド
@@ -36,7 +36,7 @@ https://holiday-app-1-94ec011ee64f.herokuapp.com/homes/ask
 
 ### 全体設計
 
-<img width="781" alt="スクリーンショット 2025-04-14 15 24 04" src="https://github.com/user-attachments/assets/b0aaa564-f664-43b5-9b63-689f091d167b" />
+<img width="980" alt="スクリーンショット 2025-04-21 22 39 00" src="https://github.com/user-attachments/assets/e4f04796-bcb9-4e07-ad7b-a731446bc3d9" />
 
 ### 現在地機能
 ワンクリックで今いる場所からすぐに出発したいときに便利
@@ -64,7 +64,7 @@ AIが提案するスポットに対して、Google検索結果から公式サイ
 
 ### 使用したアイコンのサイト様
 
-<a target="_blank" href="https://icons8.com/icon/PndQWK6M1Hjo/bootstrap">ブートストラップ</a> アイコン by <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://icons8.com/icon/CIAZz2CYc6Kc/tailwindcss">Tailwindcss</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 <a target="_blank" href="https://icons8.com/icon/DcygmpZqBEd9/google-maps">グーグルマップ-新しい</a> アイコン by <a target="_blank" href="https://icons8.com">Icons8</a>
 
