@@ -1,61 +1,58 @@
-<div class="background-image-1">
-<div class="container d-flex align-items-center justify-content-center min-vh-100">
-  <div class="w-25">
-    <% if @user.errors.any? %>
-      <div class="error-messages alert alert-danger">
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <%= form_with model: @user, url: homes_answer_path, method: :post, local: true do |f| %>
-      <div class="form-group">
-        <%= label_tag :location, "現在地:", class: "form-label fw-bold color-w px-2" %>
-        <%= text_field_tag :location, nil, required: true, placeholder: "例: 福岡県 福岡市", id: "location-input", class: "form-control color-w" %>
-        <div class="text-end">
-          <%= button_tag "現在地を取得", type: "button", id: "get-location-btn", class: "btn btn-primary btn-sm mt-2", data: { disable_with: "取得中..." } %>
-        </div>
-      </div>
+<div class="bg-white/80 backdrop-blur-sm shadow-lg rounded-xl p-6 max-w-lg mx-auto mt-12 space-y-4">
+  <% if @user.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <ul class="list-disc pl-5">
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-      <div class="form-group mb-2">
-        <%= label_tag :mood, "気持ち:", class: "form-label fw-bold color-w px-2" %>
-        <%= text_field_tag :mood, nil, required: true, placeholder: "例: リラックスしたい", class: "form-control color-w" %>
-      </div>
+  <%= form_with model: @user, url: homes_answer_path, method: :post, local: true do |f| %>
 
-      <div class="form-group mb-2">
-        <%= label_tag :start_date, "休日の開始日:", class: "form-label fw-bold color-w px-2" %>
-        <%= date_field_tag :start_date, nil, required: true, min: Date.today, class: "form-control color-w" %>
+    <div>
+      <label for="location" class="block font-semibold text-gray-800 mb-1">現在地</label>
+      <%= text_field_tag :location, nil, required: true, placeholder: "例: 福岡県 福岡市", id: "location-input", class: "w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300" %>
+      <div class="text-right mt-1">
+        <%= button_tag "現在地を取得", type: "button", id: "get-location-btn", class: "text-sm bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700" %>
       </div>
+    </div>
 
-      <div class="form-group mb-2">
-        <%= label_tag :end_date, "休日の終了日:", class: "form-label fw-bold color-w px-2" %>
-        <%= date_field_tag :end_date, nil, required: true, min: Date.today, class: "form-control color-w" %>
-        <div class="text-end">
-          <small class="color-w">※開始日から5日以内の日付を選択してください
-          </small>
-        </div>
-      </div>
+    <div>
+      <label class="block font-semibold text-gray-800 mb-1">気持ち</label>
+      <%= text_field_tag :mood, nil, required: true, placeholder: "例: リラックスしたい", class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
+    </div>
 
-      <div class="form-group mb-2">
-        <%= label_tag :people, "同行する人数:", class: "form-label fw-bold color-w px-2" %>
-        <%= select_tag :people, options_for_select((1..5).map { |n| [n, n] }), prompt: "人数を選択", required: true, class: "form-control color-w" %>
-      </div>
+    <div>
+      <label class="block font-semibold text-gray-800 mb-1">休日の開始日</label>
+      <%= date_field_tag :start_date, nil, required: true, min: Date.today, class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
+    </div>
 
-      <div class="form-group mb-2">
-        <%= label_tag :budget, "1人当たりの予算:", class: "form-label fw-bold color-w px-2" %>
-        <%= select_tag :budget, options_for_select((0..100000).step(5000).map { |n| [number_with_delimiter(n), n] }), prompt: "予算を選択", required: true, class: "form-control color-w" %>
-      </div>
+    <div>
+      <label class="block font-semibold text-gray-800 mb-1">休日の終了日</label>
+      <%= date_field_tag :end_date, nil, required: true, min: Date.today, class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
+      <small class="text-gray-600 block text-right mt-1">※開始日から5日以内の日付を選択してください</small>
+    </div>
 
-      <div class="form-group mb-2">
-        <%= label_tag :remarks, "備考:", class: "form-label fw-bold color-w px-2" %>
-        <%= text_field_tag :remarks, nil, placeholder: "例: 交通機関を使う", class: "form-control color-w" %>
-      </div>
+    <div>
+      <label class="block font-semibold text-gray-800 mb-1">同行する人数</label>
+      <%= select_tag :people, options_for_select((1..5).map { |n| [n, n] }), prompt: "人数を選択", required: true, class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
+    </div>
 
-      <div class="form-group text-end">
-        <%= submit_tag "質問する", class: "btn btn-primary btn-sm" %>
-      </div>
-    <% end %>
-  </div>
+    <div>
+      <label class="block font-semibold text-gray-800 mb-1">1人当たりの予算</label>
+      <%= select_tag :budget, options_for_select((0..100000).step(5000).map { |n| [number_with_delimiter(n), n] }), prompt: "予算を選択", required: true, class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
+    </div>
+
+    <div>
+      <label class="block font-semibold text-gray-800 mb-1">備考</label>
+      <%= text_field_tag :remarks, nil, placeholder: "例: 交通機関を使う", class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
+    </div>
+
+    <div class="text-right">
+      <%= submit_tag "質問する", class: "bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700" %>
+    </div>
+
+  <% end %>
 </div>

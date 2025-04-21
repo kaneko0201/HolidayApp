@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_pack_tag 'application', defer: true %>
   </head>
 
   <body>
+    <div class="fixed inset-0 bg-cover bg-center -z-10"       style="background-image: url('/assets/train-3758523_1920.jpg');">
+    </div>
+
     <%= yield %>
   </body>
 </html>

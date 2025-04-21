@@ -5,9 +5,6 @@ if ['development', 'test'].include?(ENV['RAILS_ENV'] || ENV['RACK_ENV'])
   Dotenv.load
 end
 
-require 'execjs'
-ExecJS.runtime = ExecJS::Runtimes::Node
-
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems

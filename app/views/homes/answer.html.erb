@@ -1,38 +1,44 @@
-<div class="background-image-1">
-<div class="container p-3">
-  <strong>
-    <p class="mt-4 fs-3 color-w d-inline-block px-2">おでかけプラン</p>
-  </strong>
-  <div class="alert alert-light border color-w">
+<div class="container mx-auto px-4 mt-10 text-gray-800">
+  <h2 class="text-xl font-semibold bg-white/70 backdrop-blur-sm px-4 py-2 rounded-md shadow inline-block mb-4">
+    おでかけプラン
+  </h2>
+
+  <div class="bg-white/80 backdrop-blur-sm p-5 rounded-lg shadow border">
     <%= simple_format(@answer) %>
   </div>
 
   <% if @search_results.present? %>
-    <strong><p class="mt-4 fs-3 color-w d-inline-block px-2">関連する公式サイト</p></strong>
-    <ul class="list-group">
+    <!-- 関連する公式サイト -->
+    <h2 class="text-xl font-semibold bg-white/70 backdrop-blur-sm px-4 py-2 rounded-md shadow inline-block mt-10 mb-4">
+      関連する公式サイト
+    </h2>
+
+    <ul class="space-y-4">
       <% @search_results.each do |place_data| %>
-        <li class="list-group-item color-w">
-          <strong><%= place_data[:name] %></strong>
+        <li class="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow border">
+          <p class="font-bold text-lg"><%= place_data[:name] %></p>
+
           <% if place_data[:results].present? %>
-            <ul class="list-group mt-2">
+            <ul class="mt-2 space-y-2 text-sm">
               <% place_data[:results].first(3).each do |result| %>
-                <li class="list-group-item">
-                  <a href="<%= result.link %>" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                <li class="border border-gray-200 rounded p-2 bg-white/60 hover:bg-white/80 transition">
+                  <a href="<%= result.link %>" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">
                     <%= result.title %>
                   </a><br>
-                  <small class="text-muted"><%= result.snippet %></small>
+                  <small class="text-gray-600"><%= result.snippet %></small>
                 </li>
               <% end %>
             </ul>
           <% else %>
-            <p class="text-muted">公式サイトが見つかりませんでした。</p>
+            <p class="text-gray-500 text-sm mt-2">公式サイトが見つかりませんでした。</p>
           <% end %>
         </li>
       <% end %>
     </ul>
   <% end %>
 
-  <div class="text-center mt-4">
-    <%= link_to "別の質問をする", homes_ask_path, class: "btn btn-primary" %>
+  <!-- 別の質問をする -->
+  <div class="text-center mt-8">
+    <%= link_to "別の質問をする", homes_ask_path, class: "bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 transition" %>
   </div>
 </div>
