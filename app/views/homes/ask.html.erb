@@ -12,7 +12,7 @@
   <%= form_with model: @user, url: homes_answer_path, method: :post, local: true do |f| %>
 
     <div>
-      <label for="location" class="block font-semibold text-gray-800 mb-1">現在地</label>
+      <label for="location" class="block font-semibold text-gray-800 mb-1">現在地<span class="inline text-red-500 text-sm ml-1">※必須</span></label>
       <%= text_field_tag :location, nil, required: true, placeholder: "例: 福岡県 福岡市", id: "location-input", class: "w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300" %>
       <div class="text-right mt-1">
         <%= button_tag "現在地を取得", type: "button", id: "get-location-btn", class: "text-sm bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700" %>
@@ -20,33 +20,33 @@
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-800 mb-1">気持ち</label>
+      <label class="block font-semibold text-gray-800 mb-1">気持ち<span class="inline text-red-500 text-sm ml-1">※必須</span></label>
       <%= text_field_tag :mood, nil, required: true, placeholder: "例: リラックスしたい", class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-800 mb-1">休日の開始日</label>
+      <label class="block font-semibold text-gray-800 mb-1">休日の開始日<span class="inline text-red-500 text-sm ml-1">※必須</span></label>
       <%= date_field_tag :start_date, nil, required: true, min: Date.today, class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-800 mb-1">休日の終了日</label>
+      <label class="block font-semibold text-gray-800 mb-1">休日の終了日<span class="inline text-red-500 text-sm ml-1">※必須</span></label>
       <%= date_field_tag :end_date, nil, required: true, min: Date.today, class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
       <small class="text-gray-600 block text-right mt-1">※開始日から5日以内の日付を選択してください</small>
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-800 mb-1">同行する人数</label>
+      <label class="block font-semibold text-gray-800 mb-1">同行する人数<span class="inline text-red-500 text-sm ml-1">※必須</span></label>
       <%= select_tag :people, options_for_select((1..5).map { |n| [n, n] }), prompt: "人数を選択", required: true, class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-800 mb-1">1人当たりの予算</label>
+      <label class="block font-semibold text-gray-800 mb-1">1人当たりの予算<span class="inline text-red-500 text-sm ml-1">※必須</span></label>
       <%= select_tag :budget, options_for_select((0..100000).step(5000).map { |n| [number_with_delimiter(n), n] }), prompt: "予算を選択", required: true, class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-800 mb-1">備考</label>
+      <label class="block font-semibold text-gray-800 mb-1">備考<span class="text-sm ml-1">※任意</span></label>
       <%= text_field_tag :remarks, nil, placeholder: "例: 交通機関を使う", class: "w-full border border-gray-300 rounded-md px-3 py-2" %>
     </div>
 
