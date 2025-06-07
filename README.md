@@ -1,4 +1,4 @@
-# 作品
+# おでかけGPT
 
 サイトURL
 https://holiday-app-1-94ec011ee64f.herokuapp.com/homes/ask
